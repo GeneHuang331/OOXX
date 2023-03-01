@@ -1,0 +1,59 @@
+name: Deploy gh-pages
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build and deploy gh-pages
+		# jobs 的名稱，正確命名才能方便狀況發生時的排查
+
+    env:
+      MY_SECRET   : ${{secrets.commit_secret}}
+      PUBLISH_DIR : .vuepress/dist
+		# 設置環境變數，先定義好腳本使用的變數
+
+    runs-on: ubuntu-latest
+		# 設置腳本運行時的 Docker base-image
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+		# 可以設置一組陣列，在本工作流中會自動用類似迴圈的方式重複注入 steps 進行運作
+		# 這邊的範例中只有使用一組內容，所以 steps 只會進行一次動作
+		# 而 steps 中的  ${{ matrix.node-version }} 就會依序注入陣列中的值
+
+#-----------------------------------------------------------------------
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: install # will run `yarn install` command
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: build # will run `yarn build` command
+    - name: Commit files
+      run: |
+        echo ${{secrets.DEPLOY_PASSWORD}} | sudo -S chown -R $USER:$USER $PUBLISH_DIR
+        cd $PUBLISH_DIR
+        git init
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git status
+        git remote add origin <https://$MY_SECRET@github.com/$GITHUB_REPOSITORY.git>
+        git checkout -b gh-pages
+        git add --all
+        git commit -m "deploy to Github pages"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: 'gh-pages'
+        force: true
+        directory: '.vuepress/dist'
