@@ -19,7 +19,7 @@ main {
   max-width: 900px;
   margin: 0 auto;
   height: 100vh;
-  background: url('./src/assets/img/lun.png') center center  no-repeat;
+  background: url('@/assets/img/lun.png') center center no-repeat;
   background-size: cover;
   display: flex;
   align-items: center;
