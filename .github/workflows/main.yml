@@ -23,7 +23,6 @@ jobs:
         run: npm run build
       - name: Commit files
         run: |
-          echo ${{secrets.DEPLOY_PASSWORD}} | sudo -S chown -R $USER:$USER $PUBLISH_DIR
           cd $PUBLISH_DIR
           git init
           git config --local user.email "action@github.com"
