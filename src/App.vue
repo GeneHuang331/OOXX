@@ -1,6 +1,7 @@
 <template>
   <main class="main">
-    <div class="checkerboard">
+    <header>{{ order }} turn</header>
+    <div :key="checkerboardKey" class="checkerboard">
       <div class="checkerboard__row" v-for="(item, i) in this.ooxxArr" :key="i">
         <div
           class="checkerboard__item"
@@ -12,19 +13,26 @@
         </div>
       </div>
     </div>
+    <footer>
+      winnner: {{ winner }}
+      <div></div>
+      <button @click="reset()">Reset</button>
+    </footer>
   </main>
 </template>
 <script>
 export default {
   data() {
     return {
+      checkerboardKey: 0,
       order: 'O',
       ooxxArr: [
         ['', '', ''],
         ['', '', ''],
         ['', '', '']
       ],
-      winner: 'draw'
+      winner: '',
+      isEnd: false
     }
   },
   methods: {
@@ -58,6 +66,7 @@ export default {
       }
     },
     chess(i, ii) {
+      if (this.isEnd) return
       this.ooxxArr[i][ii] = this.order
       this.judge(this.ooxxArr)
       this.chageOrder()
@@ -66,6 +75,7 @@ export default {
       this.order = this.order == 'O' ? 'X' : 'O'
     },
     endGame: function () {
+      this.isEnd = true
       console.log(`${this.winner}贏了`)
     },
     reset() {
@@ -74,7 +84,10 @@ export default {
         ['', '', ''],
         ['', '', '']
       ]
-      this.winner = 'draw'
+      this.order = 'O'
+      this.winner = ''
+      this.isEnd = false
+      this.checkerboardKey++
     }
   },
   created() {
@@ -88,6 +101,20 @@ export default {
         }
       },
       deep: true
+    },
+    ooxxArr: {
+      handler(val) {
+        let full = val.every((element) => {
+          return element.every((el) => {
+            return el !== ''
+          })
+        })
+        if (full) {
+          this.winner = 'draw'
+          this.endGame()
+        }
+      },
+      deep: true
     }
   }
 }
@@ -96,15 +123,15 @@ export default {
 .main {
   height: 100vh;
   width: 100vw;
-  background: palegoldenrod;
+  background: rgb(146, 146, 146);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start ;
+  justify-content: flex-start;
   .checkerboard {
     width: 50%; /* 相對與container的width */
     padding-bottom: 50%; /* 相對與container的width */
-    background: palegreen;
+    background: rgb(218, 218, 218);
   }
 }
 .checkerboard {
