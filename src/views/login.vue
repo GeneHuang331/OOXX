@@ -19,12 +19,13 @@ main {
   max-width: 900px;
   margin: 0 auto;
   height: 100vh;
-  background: red;
+  background: url('./src/assets/img/lun.png') center center  no-repeat;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   .login {
-    background: green;
+    background: rgb(71, 48, 172);
     width: 150px;
     height: 50px;
     font-size: 1rem;
