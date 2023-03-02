@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import login from '@/views/login.vue'
 import gameView from '@/views/gameView.vue'
 const router = createRouter({
-  history: createWebHistory('/OOXX/'),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/:id',
