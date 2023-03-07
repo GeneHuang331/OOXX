@@ -23,11 +23,14 @@ main {
   background: #cdf1ff url('@/assets/img/slime_small.png') bottom 60% center no-repeat;
   background-size: cover;
   position: relative;
+  overflow: hidden;
   .logo {
     position: absolute;
-    top: 0%;
+    top: 0;
     right: 0;
     width: 500px;
+    animation-duration: 3s;
+    animation: 2s infinite alternate swing;
     @media (max-width: 767px) {
       width: 450px;
     }
@@ -42,6 +45,17 @@ main {
     left: 50%;
     bottom: 100px;
     transform: translateX(-50%);
+  }
+  @keyframes swing {
+    from {
+      top: 0;
+      transform: rotate(0deg);
+    }
+
+    to {
+      top: -30px;
+      transform: rotate(5deg);
+    }
   }
 }
 </style>
