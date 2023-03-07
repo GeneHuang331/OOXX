@@ -39,7 +39,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .main {
-  max-width: 900px;
+  max-width: 800px;
   height: 100vh;
   width: 100vw;
   background: rgb(146, 146, 146);

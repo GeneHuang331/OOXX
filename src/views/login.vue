@@ -1,6 +1,7 @@
 <template>
   <main>
-    <button class="login" @click="login()">登入</button>
+    <img class="logo" src="@/assets/img/logo.png" alt="logo" />
+    <button class="login" @click="login()"></button>
   </main>
 </template>
 <script>
@@ -16,20 +17,39 @@ export default {
 <style lang="scss">
 main {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   height: 100vh;
-  background: url('@/assets/img/lun.png') center center no-repeat;
+  background: #cdf1ff url('@/assets/img/slime_small.png') bottom 60% center no-repeat;
   background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  .logo {
+    position: absolute;
+    top: 0%;
+    right: 0;
+    width: 800px;
+    @media (max-width: 1023px) {
+      width: 600px;
+    }
+
+    @media (max-width: 800px) {
+      width: 500px;
+    }
+
+    @media (max-width: 767px) {
+      width: 450px;
+    }
+  }
   .login {
-    background: rgb(71, 48, 172);
-    width: 150px;
-    height: 50px;
-    font-size: 1rem;
-    color: #fff;
+    background: url('@/assets/img/text_start.png') center center no-repeat;
+    background-size: contain;
+    width: 338px;
+    height: 150px;
+    border: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
   }
 }
 </style>
