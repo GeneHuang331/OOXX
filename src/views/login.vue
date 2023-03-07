@@ -17,7 +17,7 @@ export default {
 <style lang="scss">
 main {
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   height: 100vh;
   background: #cdf1ff url('@/assets/img/slime_small.png') bottom 60% center no-repeat;
@@ -27,15 +27,7 @@ main {
     position: absolute;
     top: 0%;
     right: 0;
-    width: 800px;
-    @media (max-width: 1023px) {
-      width: 600px;
-    }
-
-    @media (max-width: 800px) {
-      width: 500px;
-    }
-
+    width: 500px;
     @media (max-width: 767px) {
       width: 450px;
     }
