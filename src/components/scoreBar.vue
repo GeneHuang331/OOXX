@@ -47,7 +47,7 @@ export default {
     transform: translate(-50%, -50%);
     width: 640px;
     height: 56px;
-    background: #2a98d1;
+    background: linear-gradient(45deg, #2a98d1, #79c3e9);
     border-radius: 16px;
     display: flex;
     align-items: center;

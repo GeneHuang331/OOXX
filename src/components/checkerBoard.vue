@@ -12,7 +12,12 @@
         :key="ii"
         @click.once="chess(i, ii)"
       >
-        {{ subItem }}
+        <template v-if="subItem == 'O'">
+          <img src="@/assets/img/O.png" alt="" />
+        </template>
+        <template v-else-if="subItem == 'X'">
+          <img src="@/assets/img/X.png" alt="" />
+        </template>
       </div>
     </div>
   </div>
@@ -21,6 +26,7 @@
 </template>
 <script>
 export default {
+  emits: ['addCheckerboardKey', 'addScore'],
   data() {
     return {
       order: 'O',
@@ -33,6 +39,7 @@ export default {
       isEnd: false
     }
   },
+  computed: {},
   methods: {
     judge: function (arr) {
       // 1.子陣列任一都是同一字元["O","O","O"]
@@ -124,7 +131,8 @@ export default {
 .checkerboard {
   width: 50%; /* 相對與container的width */
   padding-bottom: 50%; /* 相對與container的width */
-  background: rgb(218, 218, 218);
+  background: url('@/assets/img/board.svg') center center no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   &__row {
@@ -146,7 +154,9 @@ export default {
   &__item {
     flex: 1;
     height: 100%;
-    border: 1px solid rgb(133, 133, 133);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &--red {
       color: red;
     }
