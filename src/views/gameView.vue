@@ -1,8 +1,6 @@
 <template>
   <main class="main">
-    <header>
-      <div>O:{{ score.O }},X:{{ score.X }}</div>
-    </header>
+    <scoreBar :score="score" :winScore="winScore"></scoreBar>
     <checkerBoard
       :key="checkerboardKey"
       @addCheckerboardKey="addCheckerboardKey()"
@@ -12,8 +10,9 @@
 </template>
 <script>
 import checkerBoard from '@/components/checkerBoard.vue'
+import scoreBar from '@/components/scoreBar.vue'
 export default {
-  components: { checkerBoard },
+  components: { checkerBoard, scoreBar },
   data() {
     return {
       checkerboardKey: 0,
@@ -42,7 +41,8 @@ export default {
   max-width: 800px;
   height: 100vh;
   width: 100vw;
-  background: rgb(146, 146, 146);
+  background: url('@/assets/img/slime_bg.png') center center no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
