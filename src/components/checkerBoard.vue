@@ -22,7 +22,7 @@
 </template>
 <script>
 export default {
-  emits: ['addCheckerboardKey', 'addScore'],
+  emits: ['addCheckerboardKey', 'addScore','orderChange'],
   data() {
     return {
       order: 'O',
@@ -106,6 +106,12 @@ export default {
       },
       deep: true
     },
+    order: {
+      handler(val) {
+        this.$emit('orderChange', val)
+      },
+      deep: true
+    },
     ooxxArr: {
       handler(val) {
         let full = val.every((element) => {
@@ -120,6 +126,9 @@ export default {
       },
       deep: true
     }
+  },
+  created() {
+    this.$emit('orderChange', 'O')
   }
 }
 </script>
