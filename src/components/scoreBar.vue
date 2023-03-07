@@ -18,8 +18,8 @@
         ></div>
       </div>
     </div>
-    <img src="@/assets/img/o.png" alt="" class="score_img__o" />
-    <img src="@/assets/img/x.png" alt="" class="score_img__x" />
+    <img src="@/assets/img/O.png" alt="" class="score_img__o" />
+    <img src="@/assets/img/X.png" alt="" class="score_img__x" />
     <img src="@/assets/img/slime_win.png" alt="" class="score_img__slime" />
   </header>
 </template>
