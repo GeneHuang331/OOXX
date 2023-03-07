@@ -4,10 +4,6 @@
     <div class="checkerboard__row" v-for="(item, i) in this.ooxxArr" :key="i">
       <div
         class="checkerboard__item"
-        :class="{
-          'checkerboard__item--red': ooxxArr[i][ii] == 'O',
-          'checkerboard__item--green': ooxxArr[i][ii] == 'X'
-        }"
         v-for="(subItem, ii) in item"
         :key="ii"
         @click.once="chess(i, ii)"
@@ -157,12 +153,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    &--red {
-      color: red;
-    }
-    &--green {
-      color: green;
-    }
   }
 }
 </style>
