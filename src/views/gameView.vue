@@ -3,6 +3,9 @@
     <scoreBar :score="score" :winScore="winScore"></scoreBar>
     <checkerBoard
       :key="checkerboardKey"
+      :score="score"
+      :isEndGame="isEndGame"
+      :champion="champion"
       @addCheckerboardKey="addCheckerboardKey()"
       @addScore="addScore"
       @orderChange="orderChange"
@@ -27,7 +30,8 @@ export default {
         O: 0,
         X: 0
       },
-      order: ''
+      order: '',
+      champion: ''
     }
   },
   methods: {
@@ -39,6 +43,17 @@ export default {
     },
     orderChange(val) {
       this.order = val
+    }
+  },
+  computed: {
+    isEndGame() {
+      return Object.values(this.score).some((el) => el >= this.winScore)
+    }
+  },
+  watch: {
+    isEndGame() {
+      this.champion =
+        this.score['O'] >= this.winScore ? 'O' : this.score['X'] >= this.winScore ? 'X' : ''
     }
   },
   created() {

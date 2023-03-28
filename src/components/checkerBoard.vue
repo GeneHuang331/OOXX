@@ -1,5 +1,4 @@
 <template>
-  <div>{{ order }} turn</div>
   <div class="checkerboard">
     <div class="checkerboard__row" v-for="(item, i) in this.ooxxArr" :key="i">
       <div
@@ -17,12 +16,45 @@
       </div>
     </div>
   </div>
-  <div>winnner: {{ winner }}</div>
-  <button @click="reset()">Reset</button>
+
+  <div class="result_mask" v-if="winner">
+    <template v-if="isEndGame">
+      <div class="trophy_container">
+        <template v-if="champion == 'O'">
+          <img class="trophy_container__winner" src="@/assets/img/O.png" alt="" />
+          <img class="trophy_container__trophy" src="@/assets/img/trophy.png" alt="" />
+        </template>
+        <template v-else-if="champion == 'X'">
+          <img class="trophy_container__winner" src="@/assets/img/X.png" alt="" />
+          <img class="trophy_container__trophy" src="@/assets/img/trophy.png" alt="" />
+        </template>
+      </div>
+      <router-link to="/login" class="exit">
+        <img src="@/assets/img/exit.svg" alt="" />
+      </router-link>
+    </template>
+    <template v-else>
+      <div>
+        <template v-if="winner == 'O'">
+          <img src="@/assets/img/O.png" alt="" />
+          <img src="@/assets/img/win.png" alt="" />
+        </template>
+        <template v-else-if="winner == 'X'">
+          <img src="@/assets/img/X.png" alt="" />
+          <img src="@/assets/img/win.png" alt="" />
+        </template>
+      </div>
+
+      <button @click="reset()" class="next">
+        <img src="@/assets/img/next.png" alt="" />
+      </button>
+    </template>
+  </div>
 </template>
 <script>
 export default {
-  emits: ['addCheckerboardKey', 'addScore','orderChange'],
+  props: ['score', 'isEndGame', 'champion'],
+  emits: ['addCheckerboardKey', 'addScore', 'orderChange'],
   data() {
     return {
       order: 'O',
@@ -162,6 +194,46 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+.result_mask {
+  width: 100%;
+  height: 100%;
+  background: rgb(255 237 133 / 90%);
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.next {
+  background: transparent;
+  border: 0;
+  width: 200px;
+  img {
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+}
+.trophy_container {
+  margin-right: 60px;
+  &__winner {
+    width: 180px;
+  }
+  &__trophy {
+    width: 120px;
+    z-index: 1;
+    transform: rotate(8deg);
+    position: absolute;
+    right: -60px;
+    bottom: 30px;
+  }
+}
+.exit {
+  width: 80px;
+  img{
+    width: 100%;
   }
 }
 </style>
